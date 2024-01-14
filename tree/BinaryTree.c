@@ -28,9 +28,15 @@ struct Node* createRightNode(struct Node* root,int value) {
     root->right=createNode(value);
     return root->right;
 }
-
+void freeTree(struct Node* root){
+    if (root == NULL) return;
+    freeTree(root->left);
+    freeTree(root->right);
+    free(root);
+}
 int main(){
     struct Node* node = createNode(12);
     printf("%d", node->value);
+    freeTree(node);
     return 0;
 }
